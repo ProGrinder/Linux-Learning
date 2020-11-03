@@ -1,0 +1,18 @@
+gcc -Wall -shared dlib.c -o libdlib.so
+将dlib.c 编译成 libdlib.so 文件
+
+file libdlib.so 可以看到该文件是shared共享的.
+
+gcc -Wall test.c -o test -L ./ -ldlib
+
+发现libdlib.so=>not found还是找不到
+
+通过sudo cp ./libdlib.so /usr/lib =>将该文件复制到usr路径下
+
+libdlib.so才能被找到
+
+
+
+
+
+
