@@ -113,7 +113,7 @@ int save(recorder* pt)
 
 	fclose(fp);
 	
-	return 0;
+	return 1;
 }
 
 //升序

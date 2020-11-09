@@ -5,60 +5,93 @@ static void menu()
 	printf("-------------------------\n");
 	printf("1. Input a Record\n");
 	printf("2. Add a Random Record\n");
-	printf("3. ");
-	printf("0. exit");
+	printf("3. Show the Directory\n");
+	printf("4. Show the Directory by Order\n");
+	printf("0. exit\n");
+	printf("-------------------------\n");
 }
 
 
 
 int main()
 {
-	/*
+	
 	char choice;
-
-	recorder *r = NULL;
-
-
-	printf("-------Here is a Telephone Directory-------\n");
-	*/
-	
-    	recorder* pt = NULL;
+	recorder* pt = NULL;
 	rclist* recorders = NULL;
-    	
-  	//
-	while(pt == NULL)
-	{
-		pt = input();
-	}
-	
-	save(pt);
 
-	printf("save 成功!");
-    	
-	recorders  = readFile();
-	printf("read 成功!");
- 	//输出测试
-	output(recorders);
 
+
+	printf("Here is a Telephone Directory\n");
 	
-	//排序测试
-	int type;
-	while(1)
+		
+	do
 	{
-		printf("请输入排序方法(1-升序 2-降序): ");
-		scanf("%d", &type);
-		if(type == 1 || type == 2)
+		menu();
+		printf("please input your choice: ");
+		choice = getc(stdin);
+		getc(stdin);
+
+		switch(choice - '0')
 		{
-			break;
+			case 1: 
+			{
+				while(pt == NULL)
+				{
+					pt = input();
+				}
+				if(save(pt) == 1)
+				{
+					printf("保存成功！\n");
+				}
+				else
+				{
+					printf("找不到文件！\n");
+				}
+				break;
+			}
+
+			case 2:
+			{
+				if(save(randdat()) == 1)
+				{
+					printf("保存成功！\n");
+				}
+				break;
+			}
+
+			case 3:
+			{
+				recorders  = readFile();
+				output(recorders);
+				break;
+			}
+			case 4:
+			{
+					//排序测试
+				int type;
+				while(1)
+				{
+					printf("请输入排序方法(1-升序 2-降序): ");
+					scanf("%d", &type);
+					if(type == 1 || type == 2)
+					{
+						break;
+					}
+				}
+
+				output(mysort(type));
+				break;
+			}
+
+			case 0:
+			{
+				exit(0);
+				break;
+			}
+			
 		}
-	}
+	}while(1);
 
-	output(mysort(type));
-
-
-	//随机生成数据	
-	randdat();
-	
-	
     	return 0;
 }
